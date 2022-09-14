@@ -20,7 +20,7 @@ wss.on('connection', (ws, connectionRequest) => {
 
     var connectionParams = {};
     if(connectionRequest && connectionRequest.uri){
-        const [_path, params] = connectionRequest?.url?.split("?");
+        const [_path, params] = connectionRequest.url.split("?");
         connectionParams = queryString.parse(params);
     }
     if(connectionParams.token && !CLIENTS[connectionParams.token]){
