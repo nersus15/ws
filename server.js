@@ -18,10 +18,11 @@ wss.on('connection', (ws, connectionRequest) => {
        console.log("A Client Close Connection");
     });
 
-
-
-    const [_path, params] = connectionRequest?.url?.split("?");
-    const connectionParams = queryString.parse(params);
+    var connectionParams = {};
+    if(connectionRequest && connectionRequest.uri){
+        const [_path, params] = connectionRequest?.url?.split("?");
+        connectionParams = queryString.parse(params);
+    }
     if(connectionParams.token && !CLIENTS[connectionParams.token]){
         CLIENTS[connectionParams.token] = ws;
         console.log("PElanggan");
